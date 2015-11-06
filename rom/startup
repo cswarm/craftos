@@ -190,8 +190,9 @@ shell.setCompletionFunction( "rom/programs/http/pastebin", completePastebin )
 shell.setCompletionFunction( "rom/programs/rednet/chat", completeChat )
 
 -- Run autorun files
-if fs.exists( "/rom/autorun" ) and fs.isDir( "/rom/autorun" ) then
+--[[if fs.exists( "/rom/autorun" ) and fs.isDir( "/rom/autorun" ) then
 	local tFiles = fs.list( "/rom/autorun" )
+	print(tFiles)
 	table.sort( tFiles )
 	for n, sFile in ipairs( tFiles ) do
 		if string.sub( sFile, 1, 1 ) ~= "." then
@@ -201,7 +202,7 @@ if fs.exists( "/rom/autorun" ) and fs.isDir( "/rom/autorun" ) then
 			end
 		end
 	end
-end
+end ]]
 
 -- Run the user created startup, either from disk drives or the root
 local sUserStartup = shell.resolveProgram( "/startup" )
