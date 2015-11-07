@@ -53,7 +53,13 @@ function write( sText )
 end
 
 function print( ... )
-  nativeprint(...)
+  local tArgs = { ... }
+
+  if tArgs[0] == nil then
+    nativeprint()
+  else
+    nativeprint(...)
+  end
 end
 
 function printError( ... )
@@ -257,11 +263,7 @@ for n,sFile in ipairs( tApis ) do
 end
 
 if bAPIError then
-    print("API ERROR")
-    print( "Press any key to continue" )
-    os.pullEvent( "key" )
-    term.clear()
-    term.setCursorPos( 1,1 )
+  error('An API failed to load')
 end
 
 -- Run the shell
