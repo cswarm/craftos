@@ -1,7 +1,14 @@
 print("CBios v1.0.0")
 print("CrfOS v1.7.4")
-print("Node "..tostring(njs.host_emu_version()))
+print("Node "..tostring(njs.host_node_version()))
 print("OpenSSL v"..tostring(njs.host_openssl_version()))
+print("Build Version: "..tostring(njs.host_emu_version()))
+print("Build Date: "..tostring(njs.host_built()))
+print("Built On: "..tostring(njs.host_built_with()))
+
+-- remove VM emu connection
+_G["js"] = nil
+js = nil
 
 local nativesetfenv = setfenv
 local nativeprint = print
