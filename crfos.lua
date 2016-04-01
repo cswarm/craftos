@@ -1,14 +1,4 @@
-print("CBios v1.0.0")
 print("CrfOS v1.7.4")
-print("Node "..tostring(njs.host_node_version()))
-print("OpenSSL v"..tostring(njs.host_openssl_version()))
-print("Build Version: "..tostring(njs.host_emu_version()))
-print("Build Date: "..tostring(njs.host_built()))
-print("Built On: "..tostring(njs.host_built_with()))
-
--- remove VM emu connection
-_G["js"] = nil
-js = nil
 
 local nativesetfenv = setfenv
 local nativeprint = print
@@ -60,13 +50,7 @@ function write( sText )
 end
 
 function print( ... )
-  local tArgs = { ... }
-
-  if tArgs[0] == nil then
-    nativeprint()
-  else
-    nativeprint(...)
-  end
+  nativeprint(...)
 end
 
 function printError( ... )
@@ -116,6 +100,7 @@ end
 local tAPIsLoading = {}
 function os.loadAPI( _sPath )
     local sName = fs.getName( _sPath )
+    print('load api '..sName)
     if tAPIsLoading[sName] == true then
         printError( "API "..sName.." is already being loaded" )
         return false
@@ -277,6 +262,8 @@ end
 local ok, err = pcall( function()
     parallel.waitForAny(
         function()
+          print("done")
+          print()
           njs.docode()
         end,
         function()

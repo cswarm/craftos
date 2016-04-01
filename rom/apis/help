@@ -17,7 +17,7 @@ function lookup( _sTopic )
 			return sPath
     	end
     end
-	
+
 	-- Not found
 	return nil
 end
@@ -27,26 +27,22 @@ function topics()
 	local tItems = {
 	    [ "index" ] = true
 	}
-	
+
 	-- Add topics from the path
+	local tItemList = {}
     for sPath in string.gmatch(sPath, "[^:]+") do
 		if fs.isDir( sPath ) then
 			local tList = fs.list( sPath )
-			for n,sFile in pairs( tList ) do
+			for n,sFile in ipairs( tList ) do
 				if string.sub( sFile, 1, 1 ) ~= "." then
 					if not fs.isDir( fs.combine( sPath, sFile ) ) then
-						tItems[ sFile ] = true
+						table.insert(tItemList, sFile)
 					end
 				end
 			end
 		end
-    end	
+    end
 
-	-- Sort and return
-	local tItemList = {}
-	for sItem, b in pairs( tItems ) do
-		table.insert( tItemList, sItem )
-	end
 	table.sort( tItemList )
 	return tItemList
 end
@@ -62,5 +58,3 @@ function completeTopic( sText )
     end
 	return tResults
 end
-
-

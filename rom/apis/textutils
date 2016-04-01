@@ -105,33 +105,15 @@ local function tabulateCommon( bPaged, ... )
             end
         end
     end
+    
     local nCols = math.floor( w / nMaxLen )
     local nLines = 0
-    local function newLine()
-        if bPaged and nLines >= (h-3) then
-            pagedPrint()
-        else
-            print()
-        end
-        nLines = nLines + 1
-    end
 
     local function drawCols( _t )
         local nCol = 1
         for n, s in ipairs( _t ) do
-            if nCol > nCols then
-                nCol = 1
-                newLine()
-            end
-
-            local cx, cy = term.getCursorPos()
-            cx = 1 + ((nCol - 1) * nMaxLen)
-            term.setCursorPos( cx, cy )
-            term.write( s )
-
-            nCol = nCol + 1
+            print(s)
         end
-        print()
     end
     for n, t in ipairs( tAll ) do
         if type(t) == "table" then
